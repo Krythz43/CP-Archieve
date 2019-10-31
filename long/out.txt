@@ -1,0 +1,655 @@
+Running for n=2
+Match at XOR cycle number 2
+
+Running for n=3
+Match doesn't occur
+
+Running for n=4
+Match at XOR cycle number 4
+
+Running for n=5
+Match at XOR cycle number 15
+
+Running for n=6
+Match doesn't occur
+
+Running for n=7
+Match at XOR cycle number 7
+
+Running for n=8
+Match at XOR cycle number 8
+
+Running for n=9
+Match doesn't occur
+
+Running for n=10
+Match at XOR cycle number 30
+
+Running for n=11
+Match at XOR cycle number 341
+
+Running for n=12
+Match doesn't occur
+
+Running for n=13
+Match at XOR cycle number 273
+
+Running for n=14
+Match at XOR cycle number 14
+
+Running for n=15
+Match doesn't occur
+
+Running for n=16
+Match at XOR cycle number 16
+
+Running for n=17
+Match at XOR cycle number 255
+
+Running for n=18
+Match doesn't occur
+
+Running for n=19
+Match at XOR cycle number 9709
+
+Running for n=20
+Match at XOR cycle number 60
+
+Running for n=21
+Match doesn't occur
+
+Running for n=22
+Match at XOR cycle number 682
+
+Running for n=23
+Match at XOR cycle number 2047
+
+Running for n=24
+Match doesn't occur
+
+Running for n=25
+Match at XOR cycle number 25575
+
+Running for n=26
+Match at XOR cycle number 546
+
+Running for n=27
+Match doesn't occur
+
+Running for n=28
+Match at XOR cycle number 28
+
+Running for n=29
+Match doesn't occur
+
+Running for n=30
+Match doesn't occur
+
+Running for n=31
+Match at XOR cycle number 31
+
+Running for n=32
+Match at XOR cycle number 32
+
+Running for n=33
+Match doesn't occur
+
+Running for n=34
+Match at XOR cycle number 510
+
+Running for n=35
+Match at XOR cycle number 4095
+
+Running for n=36
+Match doesn't occur
+
+Running for n=37
+Match doesn't occur
+
+Running for n=38
+Match at XOR cycle number 19418
+
+Running for n=39
+Match doesn't occur
+
+Running for n=40
+Match at XOR cycle number 120
+
+Running for n=41
+Match at XOR cycle number 41943
+
+Running for n=42
+Match doesn't occur
+
+Running for n=43
+Match at XOR cycle number 5461
+
+Running for n=44
+Match at XOR cycle number 1364
+
+Running for n=45
+Match doesn't occur
+
+Running for n=46
+Match at XOR cycle number 4094
+
+Running for n=47
+Match doesn't occur
+
+Running for n=48
+Match doesn't occur
+
+Running for n=49
+Match doesn't occur
+
+Running for n=50
+Match at XOR cycle number 51150
+
+Running for n=51
+Match doesn't occur
+
+Running for n=52
+Match at XOR cycle number 1092
+
+Running for n=53
+Match doesn't occur
+
+Running for n=54
+Match doesn't occur
+
+Running for n=55
+Match doesn't occur
+
+Running for n=56
+Match at XOR cycle number 56
+
+Running for n=57
+Match doesn't occur
+
+Running for n=58
+Match doesn't occur
+
+Running for n=59
+Match doesn't occur
+
+Running for n=60
+Match doesn't occur
+
+Running for n=61
+Match doesn't occur
+
+Running for n=62
+Match at XOR cycle number 62
+
+Running for n=63
+Match doesn't occur
+
+Running for n=64
+Match at XOR cycle number 64
+
+Running for n=65
+Match at XOR cycle number 4095
+
+Running for n=66
+Match doesn't occur
+
+Running for n=67
+Match doesn't occur
+
+Running for n=68
+Match at XOR cycle number 1020
+
+Running for n=69
+Match doesn't occur
+
+Running for n=70
+Match at XOR cycle number 8190
+
+Running for n=71
+Match doesn't occur
+
+Running for n=72
+Match doesn't occur
+
+Running for n=73
+Match at XOR cycle number 511
+
+Running for n=74
+Match doesn't occur
+
+Running for n=75
+Match doesn't occur
+
+Running for n=76
+Match at XOR cycle number 38836
+
+Running for n=77
+Match doesn't occur
+
+Running for n=78
+Match doesn't occur
+
+Running for n=79
+Match doesn't occur
+
+Running for n=80
+Match at XOR cycle number 240
+
+Running for n=81
+Match doesn't occur
+
+Running for n=82
+Match at XOR cycle number 83886
+
+Running for n=83
+Match doesn't occur
+
+Running for n=84
+Match doesn't occur
+
+Running for n=85
+Match at XOR cycle number 255
+
+Running for n=86
+Match at XOR cycle number 10922
+
+Running for n=87
+Match doesn't occur
+
+Running for n=88
+Match at XOR cycle number 2728
+
+Running for n=89
+Match at XOR cycle number 2047
+
+Running for n=90
+Match doesn't occur
+
+Running for n=91
+Match at XOR cycle number 4095
+
+Running for n=92
+Match at XOR cycle number 8188
+
+Running for n=93
+Match doesn't occur
+
+Running for n=94
+Match doesn't occur
+
+Running for n=95
+Match doesn't occur
+
+Running for n=96
+Match doesn't occur
+
+Running for n=97
+Match doesn't occur
+
+Running for n=98
+Match doesn't occur
+
+Running for n=99
+Match doesn't occur
+
+Running for n=100
+Match doesn't occur
+
+Running for n=101
+Match doesn't occur
+
+Running for n=102
+Match doesn't occur
+
+Running for n=103
+Match doesn't occur
+
+Running for n=104
+Match at XOR cycle number 2184
+
+Running for n=105
+Match doesn't occur
+
+Running for n=106
+Match doesn't occur
+
+Running for n=107
+Match doesn't occur
+
+Running for n=108
+Match doesn't occur
+
+Running for n=109
+Match doesn't occur
+
+Running for n=110
+Match doesn't occur
+
+Running for n=111
+Match doesn't occur
+
+Running for n=112
+Match at XOR cycle number 112
+
+Running for n=113
+Match doesn't occur
+
+Running for n=114
+Match doesn't occur
+
+Running for n=115
+Match doesn't occur
+
+Running for n=116
+Match doesn't occur
+
+Running for n=117
+Match doesn't occur
+
+Running for n=118
+Match doesn't occur
+
+Running for n=119
+Match doesn't occur
+
+Running for n=120
+Match doesn't occur
+
+Running for n=121
+Match doesn't occur
+
+Running for n=122
+Match doesn't occur
+
+Running for n=123
+Match doesn't occur
+
+Running for n=124
+Match at XOR cycle number 124
+
+Running for n=125
+Match doesn't occur
+
+Running for n=126
+Match doesn't occur
+
+Running for n=127
+Match at XOR cycle number 127
+
+Running for n=128
+Match at XOR cycle number 128
+
+Running for n=129
+Match doesn't occur
+
+Running for n=130
+Match at XOR cycle number 8190
+
+Running for n=131
+Match doesn't occur
+
+Running for n=132
+Match doesn't occur
+
+Running for n=133
+Match doesn't occur
+
+Running for n=134
+Match doesn't occur
+
+Running for n=135
+Match doesn't occur
+
+Running for n=136
+Match at XOR cycle number 2040
+
+Running for n=137
+Match doesn't occur
+
+Running for n=138
+Match doesn't occur
+
+Running for n=139
+Match doesn't occur
+
+Running for n=140
+Match at XOR cycle number 16380
+
+Running for n=141
+Match doesn't occur
+
+Running for n=142
+Match doesn't occur
+
+Running for n=143
+Match doesn't occur
+
+Running for n=144
+Match doesn't occur
+
+Running for n=145
+Match doesn't occur
+
+Running for n=146
+Match at XOR cycle number 1022
+
+Running for n=147
+Match doesn't occur
+
+Running for n=148
+Match doesn't occur
+
+Running for n=149
+Match doesn't occur
+
+Running for n=150
+Match doesn't occur
+
+Running for n=151
+Match at XOR cycle number 32767
+
+Running for n=152
+Match at XOR cycle number 77672
+
+Running for n=153
+Match doesn't occur
+
+Running for n=154
+Match doesn't occur
+
+Running for n=155
+Match doesn't occur
+
+Running for n=156
+Match doesn't occur
+
+Running for n=157
+Match doesn't occur
+
+Running for n=158
+Match doesn't occur
+
+Running for n=159
+Match doesn't occur
+
+Running for n=160
+Match at XOR cycle number 480
+
+Running for n=161
+Match doesn't occur
+
+Running for n=162
+Match doesn't occur
+
+Running for n=163
+Match doesn't occur
+
+Running for n=164
+Match doesn't occur
+
+Running for n=165
+Match doesn't occur
+
+Running for n=166
+Match doesn't occur
+
+Running for n=167
+Match doesn't occur
+
+Running for n=168
+Match doesn't occur
+
+Running for n=169
+Match doesn't occur
+
+Running for n=170
+Match at XOR cycle number 510
+
+Running for n=171
+Match doesn't occur
+
+Running for n=172
+Match at XOR cycle number 21844
+
+Running for n=173
+Match doesn't occur
+
+Running for n=174
+Match doesn't occur
+
+Running for n=175
+Match doesn't occur
+
+Running for n=176
+Match at XOR cycle number 5456
+
+Running for n=177
+Match doesn't occur
+
+Running for n=178
+Match at XOR cycle number 4094
+
+Running for n=179
+Match doesn't occur
+
+Running for n=180
+Match doesn't occur
+
+Running for n=181
+Match doesn't occur
+
+Running for n=182
+Match at XOR cycle number 8190
+
+Running for n=183
+Match doesn't occur
+
+Running for n=184
+Match at XOR cycle number 16376
+
+Running for n=185
+Match doesn't occur
+
+Running for n=186
+Match doesn't occur
+
+Running for n=187
+Match doesn't occur
+
+Running for n=188
+Match doesn't occur
+
+Running for n=189
+Match doesn't occur
+
+Running for n=190
+Match doesn't occur
+
+Running for n=191
+Match doesn't occur
+
+Running for n=192
+Match doesn't occur
+
+Running for n=193
+Match doesn't occur
+
+Running for n=194
+Match doesn't occur
+
+Running for n=195
+Match doesn't occur
+
+Running for n=196
+Match doesn't occur
+
+Running for n=197
+Match doesn't occur
+
+Running for n=198
+Match doesn't occur
+
+Running for n=199
+Match doesn't occur
+
+Running for n=200
+Match doesn't occur
+
+Running for n=201
+Match doesn't occur
+
+Running for n=202
+Match doesn't occur
+
+Running for n=203
+Match doesn't occur
+
+Running for n=204
+Match doesn't occur
+
+Running for n=205
+Match doesn't occur
+
+Running for n=206
+Match doesn't occur
+
+Running for n=207
+Match doesn't occur
+
+Running for n=208
+Match at XOR cycle number 4368
+
+Running for n=209
+Match doesn't occur
+
+Running for n=210
+Match doesn't occur
+
+Running for n=211
+Match doesn't occur
+
+Running for n=212
+Match doesn't occur
+
+Running for n=213
+Match doesn't occur
+
+Running for n=214
+Match doesn't occur
+
+Running for n=215
+Match doesn't occur
+
+Running for n=216
+Match doesn't occur
+
+Running for n=217
+Match at XOR cycle number 32767
+
+Running for n=218
+Match doesn't occur
+
+Running for n=219
+Match doesn't occur
+
+Running for n=220
