@@ -24,43 +24,23 @@ using namespace std;
 #define all(x) (x).begin(),(x).end()
 #define SOP(a,comp) sort(a.begin(),a.end(),comp)
 #define inf INT_MAX
-// #define endl '\n'
+#define endl '\n'
 
-bool isprime(int n){
-    if(n==2)return true;
-    if(n%2==0 || n==1)return false;
-    for(int i=3;i<=sqrt(n);i+=2){
-        if(n%i == 0)return false;
+
+void solve(vector<int> a){
+    for(int i = a[0]+1;i<=d;i++){
+
     }
-    return true;
 }
 int main()
 {
-    fastio;
-    int n;
-    cin>>n;
-    vinput(a,n);
-    lli sum=0,cs=0;
-    rep(i,n,0){
-        int x=a[i]>0?a[i]:-a[i];
-        if(x%2)cs++;
-        sum+=a[i]/2;
-    }
-
-    rep(i,n,0){
-        int x=a[i]>0?a[i]:-a[i];
-        if(x%2){
-            if(sum==0 || x%2 == 0)cout<<a[i]/2;
-            else if(sum > 0){
-                if(a[i]>=0)cout<<a[i]/2;
-                else {cout<<a[i]/2-1;sum--;}
-            }
-            else{
-                if(a[i]>=0){cout<<a[i]/2+1;sum++;}
-                else cout<<a[i]/2;   
-            }
-        }
-        else cout<<a[i]/2;
-        nl;
-    }
+   fastio;
+   vector<int> a;
+   int d;
+   cin>>d;
+   rep(i,d+1,1){
+       a.pb(i);
+       solve(a);
+       a.clear();
+   }
 }
