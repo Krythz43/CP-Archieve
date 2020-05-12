@@ -35,13 +35,13 @@ vector <int> a;
 struct data
 {
 	//Use required attributes
-	int min,mnc,gcd;
+	int mn,gcd,cnt;
 
 	//Default Values
 	data(){
-		min = 1e9;
-        mnc = 0;
+		mn = 2e9;
         gcd = 0;
+        cnt = 0;
 	}
 };
 
@@ -57,18 +57,26 @@ struct SegTree
 		N = n;
 		S = 4 * n + 5;
 		st.resize(S);
+		cLazy.assign(S, false);
 	}
 
 	//Write reqd merge functions
 	void merge(data &cur, data &l, data &r) 
 	{
-		if(l.min < r.min) cur = l;
-        else cur = r;
+		if(l.mn == r.mn){
+            cur.mn = l.mn;
+            cur.cnt = l.cnt + r.cnt;
+        }
+        else if(l.mn < r.mn){
+            cur.mn = l.mn;
+            cur.cnt = l.cnt;
+        }
+        else{
+            cur.mn = r.mn;
+            cur.cnt = r.cnt;
+        }
 
-        if(l.min == r.min)cur.mnc=l.mnc+r.mnc;
-
-        cur.gcd = __gcd(l.gcd,r.gcd);
-        // cout<<"calculating gcd of "<<l.gcd<<" and "<<r.gcd<<" as "<<cur.gcd<<endl;
+		cur.gcd = __gcd(l.gcd, r.gcd);
 	}
 	
 
@@ -76,9 +84,9 @@ struct SegTree
 	{
 		if(L==R)
 		{
-			st[node].min = a[L];
-            st[node].mnc = 1;
-            st[node].gcd = a[L];
+			st[node].mn = a[L];
+			st[node].gcd = a[L];
+            st[node].cnt = 1;
 			return;
 		}
 		int M=(L + R)/2;
@@ -101,9 +109,7 @@ struct SegTree
 		return cur;
 	}
 
-	
 	data query(int l, int r){return Query(1, 1, N, l, r);}
-	void clear(){N =0;S=0;st.clear();cLazy.clear();lazy.clear();}
 };
 
 int main()
@@ -114,18 +120,17 @@ int main()
 	tree.init(n); 
 	a.resize(n); 
 	rep(i,n,0)cin>>a[i];
-	tree.build(1,0,n-1);
 
+	tree.build(1,0,n-1);
     int t;
     cin>>t;
     while(t--){
         int l,r;
         cin>>l>>r;
-        data ans = tree.query(l,r);
-        // cout<<ans.gcd<<" "<<ans.min<<" "<<ans.mnc<<endl;
-        if(ans.gcd % ans.min == 0){
-            cout<<r-l+1-ans.mnc<<endl;
-        }
+        auto x = tree.query(l,r);
+
+        // cout<<x.gcd<<" "<<x.mn<<endl;
+        if(x.gcd == x.mn)cout<<r-l+1-x.cnt<<endl;
         else cout<<r-l+1<<endl;
     }
 }

@@ -29,37 +29,11 @@ using namespace std;
 int main()
 {
     fastio;
-    int n;
-    cin>>n;
-    vi a(n+1);
-    rep(i,n+1,1)cin>>a[i];
-
-    map <int,int> M;
-    rep(i,n+1,1){
-        M[a[i]]=M[a[i]-1]+1;
+    lli n,k;
+    cin>>n>>k;
+    while(k--){
+        if(n%10 == 0)n/=10;
+        else n--;
     }
-
-    lli ans=0,tans;
-
-    rep(i,n+1,1){
-        if(M[a[i]]>ans){
-            ans=M[a[i]];
-            tans=a[i];
-        }
-    }
-
-    cout<<ans<<endl;
-    vi v;
-    for(int i=n;i;i--){
-        if(!ans)break;
-
-        if(tans==a[i]){
-            v.pb(i);
-            tans--;
-            ans--;
-        }
-    }
-
-    reverse(all(v));
-    printarray(v,v.size())
+    cout<<n<<endl;
 }
