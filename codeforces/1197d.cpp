@@ -23,30 +23,39 @@ using namespace std;
 #define SO(a) sort(a.begin(),a.end())
 #define all(x) (x).begin(),(x).end()
 #define SOP(a,comp) sort(a.begin(),a.end(),comp)
-#define inf INT_MAX
+#define inf (-LLONG_MAX/2)
 #define endl '\n'
+
+vlli a;
+int n,m,k;
+const lli SIZE = 3e5+5;
+
+lli dp[SIZE][15];
+
+lli solve(lli idx,lli M){
+    if(idx >= n)return 0;
+
+    lli & ans = dp[idx][M];
+    if(ans != inf)return ans;
+
+    ans = 0;
+
+    if(M%m == 0)ans = -k;    
+    ans += a[idx];
+
+    return ans = max(ans,ans + solve(idx + 1, (M + 1)%m)); 
+}
 
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    cin>>n>>m>>k;
+    a.resize(n);
+    ainput(a,n);
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
-    }
+    rep(i,n+5,0)rep(j,m + 5,0)dp[i][j] = inf;
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    lli ans = 0;
+    rep(i,n,0)ans = max(ans,solve(i,0));
+    cout<<ans<<endl;
 }

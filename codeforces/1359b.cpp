@@ -29,24 +29,34 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int t;
+    cin>>t;
+    while(t--){
+        lli n,m,x,y;
+        cin>>n>>m>>x>>y;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        vector<string> a(n);
+        rep(i,n,0)cin>>a[i];
+        lli A[n][m];
+        rep(i,n,0)rep(j,m,0)A[i][j] = 1;
+        rep(i,n,0)rep(j,m,0)if(a[i][j] == '*')A[i][j] = 0;
+
+        rep(i,n,0)for(int j = m - 2; j>=0 ;j--)if(A[i][j] != 0)A[i][j] += A[i][j + 1];
+
+        lli ans = 0;
+
+        rep(i,n,0)if(A[i][0] != 0)ans += min(A[i][0]*x,(A[i][0]/2)*y + (A[i][0]%2)*x);
+        else if(m != 1){
+            ans += min(A[i][1]*x,(A[i][1]/2)*y + (A[i][1]%2)*x);
+        }
+
+        // cout<<ans<<endl;
+        // displaymatrix(A,n,m)
+        rep(i,n,0)
+        rep(j,m - 1,1)
+        if(A[i][j] == 0)
+        ans += min(A[i][j + 1]*x,(A[i][j + 1]/2)*y + (A[i][j + 1]%2)*x);
+
+        cout<<ans<<endl;
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

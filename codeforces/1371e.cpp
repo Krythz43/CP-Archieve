@@ -26,27 +26,59 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+int n,p;
+vlli a;
+
+bool F(lli x){
+    int f = 1;
+
+    lli cs = x;
+    rep(i,n,0){
+        if(i + p - 1 < n && a[i + p - 1] <= cs){
+            f = 0;
+            break;
+        }
+        cs++;
+    }
+
+    return f;
+}
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
+    cin>>n>>p;
+    a.resize(n);
+    ainput(a,n);
     SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    lli lo = 0, hi = a[n - 1], mid;
+    rep(i,n,0)lo=max(lo,a[i] - i);
+    lli ctm = lo;
+
+    if(!F(lo)){
+        cout<<0<<endl;
+        nl;
+        return 0;
+    }  
+
+
+    while(hi - lo > 1){
+        // cout<<lo<<" "<<hi<<endl;
+        mid = (hi + lo)/2;
+        if(F(mid))lo = mid;
+        else hi = mid;
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    if(F(hi)){
+        cout<<hi - ctm + 1<<endl;
+        rep(i,hi + 1,ctm)cout<<i<<" ";
+        nl;
+    }
+    else{
+        cout<<lo - ctm + 1<<endl;
+        rep(i,lo + 1,ctm)cout<<i<<" ";
+        nl;
+    }
+
 }

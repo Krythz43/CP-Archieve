@@ -29,24 +29,30 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        vinput(a,2*n);
+        vlli o,e;
+        rep(i,2*n,0)
+        if(a[i]%2)o.pb(i);
+        else e.pb(i);
+        
+        int co = 0;
+        for(int i = 0;i < o.size(); i += 2){
+            if(co != n-1 && i != o.size() - 1){
+                cout<<o[i] + 1<<" "<<o[i + 1] + 1<<endl;
+                co++;
+            }
+        }
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        for(int i = 0;i < e.size(); i += 2){
+            if(co != n-1 && i != e.size() - 1){
+                cout<<e[i] + 1<<" "<<e[i + 1] + 1<<endl;
+                co++;
+            }
+        }
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

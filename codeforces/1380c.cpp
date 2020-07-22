@@ -24,29 +24,33 @@ using namespace std;
 #define all(x) (x).begin(),(x).end()
 #define SOP(a,comp) sort(a.begin(),a.end(),comp)
 #define inf INT_MAX
-#define endl '\n'
+// #define endl '\n'
 
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int t;
+    cin>>t;
+    while(t--){
+        lli n,x;
+        cin>>n>>x;
+        vinput(a,n);
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        lli ans = 0;
+
+        sort(all(a));
+        reverse(all(a));
+
+        lli taken = 1;
+
+        for(int i = 0;i<n;i++){
+            if(a[i]*taken >= x){
+                ans++;
+                taken = 1;
+            }
+            else taken++;
+        }
+
+        cout<<ans<<endl;
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

@@ -26,27 +26,31 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+lli F(lli a, lli b, lli x, lli y){
+	x--,y--;
+	lli sum = (y * (y - 1) - x * (x - 1)) / 2;
+	return a * (y - x) + sum * b;
+}
+
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+	lli a,b,q;
+	cin>>a>>b>>q;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
-    }
+	while(q--){
+		lli l,t,m;
+		cin>>l>>t>>m;
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+		lli lo = l,hi = 2e6 + 5;
+		while (hi - lo > 1){
+			lli mid = (lo + hi)/2;
+			if (a + (mid - 2)*b <= t && F(a, b, l, mid) <= t * m) lo = mid;
+			else hi = mid;
+		}
+
+		if (lo == l) lo = 0;
+		cout<<lo-1<<endl;
+	}
 }

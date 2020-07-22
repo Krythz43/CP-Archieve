@@ -29,24 +29,24 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
+    int n;
+    cin>>n;
     vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    lli g1,g2;
+    g1 = g2 = 0;
+    rep(i,n,0)g1 = __gcd(g1,a[i]);
+    rep(i,n,0)a[i] /= g1;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    vlli b;
+    g2 = a.back();
+
+    for(int i = n-2; i>= 0; i--){
+        b.pb(g2*a[i]);
+        g2 = __gcd(g2,a[i]);
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    g2 = 0;
+    rep(i,n-1,0)g2 = __gcd(g2,b[i]);
+
+    cout<<g1*g2<<endl;
 }

@@ -29,24 +29,35 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
+    int n,k;
+    cin>n>>k;
     vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    vector<llipair> b;
+    rep(i,n,0)b.pb(mp(b,i));
+    SO(b);
+    reverse(all(b));
+    vlli lr(n),ll(n);
+    rep(i,n,0)lr[i] = ll[i] = i;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    vi used(n + 1,false);
+
+    int p1 = 0,p2;
+    int turn = 0;
+    int x;
+    vlli ans(n,0);
+
+    while(1){
+        if(used[b[p1].ff]){
+            p1++;
+            continue;
+        }
+
+        x = b[p1].ss;
+        ans[x] = turn + 1;
+        used[b[p1].ff] = true;
+
+        int p2 = x + 1;
+
+        
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

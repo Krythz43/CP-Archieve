@@ -29,24 +29,42 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
+    int n;
+    cin>>n;
     vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    vlli l(n),r(n);
 
-    lli ops = 0, temp;
+    stack <int> s;
+
     rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        while(!s.empty() && a[s.top()] >= a[i])s.pop();
+        if(s.empty())l[i] = -1;
+        else l[i] = s.top();
+
+        s.push(i);
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    s = stack<int>();
+
+    for(int i = n - 1;i >= 0;i--){
+        while(!s.empty() && a[s.top()] >= a[i])s.pop();
+        if(s.empty())r[i] = n;
+        else r[i] = s.top();
+
+        s.push(i);
+    }
+
+    vlli ans(n,0),fans(n+1,0);
+    
+    // printarray(l,n)
+    // printarray(r,n)
+    rep(i,n,0){
+        ans[i] = (i - l[i]) + (r[i] - i) - 1;
+        fans[ans[i]] = max(fans[ans[i]],a[i]);
+    }
+
+    for(int i = n-1; i > 0;i--)fans[i] = max(fans[i],fans[i + 1]);
+    rep(i,n+1,1)cout<<fans[i]<<" ";
+    nl;
+    
 }

@@ -26,27 +26,25 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+const long double PI = 3.14159265358979323846;
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int t;
+    cin>>t;
+    while(t--){
+        long double  n;
+        cin>>n;
+        long double angle = 360/((long double)2.0 * n);
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        // cout<<"anglr "<<angle<<endl;
+        // long double x = sin(angle*PI/180);
+        long double ans = 1.0;
+        rep(i,n/2-1,0){
+            ans += 2*sin((i+1)*angle*PI/180);
+        }
+
+        cout<<std::fixed<<std::setprecision(20)<<ans<<endl; 
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

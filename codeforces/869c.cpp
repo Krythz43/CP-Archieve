@@ -26,27 +26,42 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+
+lli ans = 0;
+const lli mod = 998244353;
+
+lli solve(lli a,lli b,lli c,lli t){
+    if(t == 0){
+        // cout<<"a";
+        if(a == 0)return 0;
+        else return 1 + a*solve(a - 1,b,c,1)%mod;
+    }
+    else if(t == 1){
+        // cout<<"b";
+        if(b == 0)return 0;
+        else return 1 + b*solve(a,b - 1,c,2)%mod;
+    }
+    else{
+        // cout<<"c";
+        if(c == 0)return 0;
+        else return 1 + c*solve(a,b,c - 1,0)%mod;
+    }
+}
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    lli a,b,c;
+    cin>>a>>b>>c;
+    ans += a*(solve(a-1,b,c,1))%mod;
+    ans += a*(solve(a-1,c,b,1))%mod;
+    ans += b*(solve(b-1,a,c,1))%mod;
+    ans += b*(solve(b-1,c,a,1))%mod;
+    ans += c*(solve(c-1,a,b,1))%mod;
+    ans += c*(solve(c-1,b,a,1))%mod;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
-    }
+    ans = (ans -2*(a + b + c) + 2 + mod)%mod;
+    ans = (ans + mod)%mod;
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    cout<<ans<<endl;
 }

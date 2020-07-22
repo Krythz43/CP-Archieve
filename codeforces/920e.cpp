@@ -26,27 +26,44 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+set <int> adj[200005],tot;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int n,m;
+    cin>>n>>m;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    rep(i,n + 1,1)tot.insert(i);
+    int x,y;
+    rep(i,m,0){
+        cin>>x>>y;
+        adj[x].insert(y);
+        adj[y].insert(x);
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    queue<int> Q;
+    vlli ans;
+    
+    rep(i,n + 1,1)if(tot.count(i)){
+        ans.pb(1);
+        Q.push(i);
+        tot.erase(i);
+        while(!Q.empty()){
+            y = Q.front();
+            Q.pop();
+            vi next;
+
+            for(auto x: tot)if(!adj[y].count(x))next.pb(x);
+            
+            for(auto x : next){
+                tot.erase(x);
+                Q.push(x);
+                ans.back()++;
+            }
+        }
+    }
+
+    cout<<ans.size()<<endl;
+    SO(ans);
+    printarray(ans,ans.size())
 }

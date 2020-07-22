@@ -29,24 +29,50 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
+    int n;
+    cin>>n;
     vinput(a,n);
-    SO(a);
-    long double ans = 0;
     lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    for(auto x:a)sum+=x;
+    if(sum%2){
+        cout<<"NO"<<endl;
+        return 0;
+    }
+    sum /= 2;
 
-    lli ops = 0, temp;
+    map<lli,lli> M;
+    lli cur = 0;
     rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        cur += a[i];
+
+        if(cur == sum){
+            cout<<"YES"<<endl;
+            return 0;
+        }
+        if(cur >= sum)
+        if(M.count(cur - sum)){
+            cout<<"YES"<<endl;
+            return 0;
+        }
+        M[a[i]]++;
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    M.clear();
+    cur = 0;
+    for(int i = n-1;i>= 0;i--){
+        cur += a[i];
+
+        if(cur == sum){
+            cout<<"YES"<<endl;
+            return 0;
+        }
+        if(cur >= sum)
+        if(M.count(cur - sum)){
+            cout<<"YES"<<endl;
+            return 0;
+        }
+        M[a[i]]++;
+    }
+
+    cout<<"NO"<<endl;
 }

@@ -26,27 +26,37 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+lli n,k,p;
+vlli a, keys;
+
+// vector<pair<lli, ipair>> x;
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    cin>>n>>k>>p;
+    a.resize(n);
+    keys.resize(k);
+    ainput(a,n);
+    ainput(keys,k);
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    SO(a);
+    SO(keys);
+
+    lli ans = LLONG_MAX;
+
+// printarray(a,n)
+//     printarray(keys,k)
+
+    rep(i,k - n + 1,0){
+        lli temp = 0;
+        rep(j,n,0){
+            temp = max(temp, abs(keys[i + j] - a[j]) + abs(p - keys[i + j]));
+        }
+
+        // cout<<i<<" "<<temp<<endl;
+        ans = min(ans, temp);
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    cout<<ans<<endl;
 }

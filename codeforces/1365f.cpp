@@ -28,25 +28,38 @@ using namespace std;
 
 int main()
 {
-    fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+   fastio;
+   int t;
+   cin>>t;
+   while(t--){
+       int n;
+       cin>>n;
+       vinput(a,n);
+       vinput(b,n);
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
-    }
+       map<ipair,int> M;
+       int x,y;
+       if(n % 2 && a[n/2] != b[n/2]){
+           cout<<"No"<<endl;
+           continue;
+       }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+       rep(i,n/2,0){
+           x = a[i],y = a[n - 1 - i];
+           if(x > y)swap(x,y);
+           M[{x,y}]++;
+       }
+
+       rep(i,n/2,0){
+           x = b[i],y = b[n - 1 - i];
+           if(x > y)swap(x,y);
+           M[{x,y}]--;
+       }
+
+       int f = 1;
+
+       for(auto x: M)if(x.ss)f = 0;
+       if(f)cout<<"Yes"<<endl;
+       else cout<<"No"<<endl;
+   }
 }

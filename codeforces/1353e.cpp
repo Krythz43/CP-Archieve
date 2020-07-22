@@ -26,27 +26,39 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+int n,k;
+string s;
+const int S = 1e6 + 5;
+lli dp[S][3];
+
+lli solve(int idx,int st){
+    if(idx >= n)return 0;
+    lli & ans = dp[idx][st];
+    if(ans != inf/2)return ans;
+    ans = 0;
+
+    if(st == 0)return ans = (s[idx] == '1' ?1:0) + min(solve(idx+k,0),min(solve(idx+k,1),solve(idx+k,2)));
+    if(st == 1)return ans = (s[idx] == '1' ?0:1) + min(solve(idx+k,1),solve(idx+k,2));
+    return ans = (s[idx] == '1'?1:0) + solve(idx+k,2);
+}
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int t;
+    cin>>t;
+    while(t--){
+        cin>>n>>k>>s;
+        rep(i,n+5,0)rep(j,3,0)dp[i][j] = inf/2;
+        lli cnt = 0,temp;
+        rep(i,n,0)cnt += (s[i] == '1');
+        lli ans = inf/2;
+        rep(i,k,0){
+            temp = cnt;
+            for(int j = i;j < n; j += k)temp -= (s[j] == '1');
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+            ans = min({ans,temp + solve(i,0),temp + solve(i,1),temp + solve(i,2)});
+        }
+        cout<<ans<<endl;
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

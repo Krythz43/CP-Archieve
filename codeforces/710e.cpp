@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std;ansans
 
 #define fastio ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL)
 #define lli long long int
@@ -26,27 +26,25 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+const int S = 2e7 + 5;
+
+lli ans = LLONG_MAX;
+lli vis[S];
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    lli n,x,y;
+    cin>>n>>x>>y;
+    rep(i,S,0)vis[i] = LLONG_MAX;
 
-    lli ops = 0, temp;
+    rep(i,2*n + 5,0)vis[i] = i*x;
+
     rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        vis[2*i] = min(vis[2*i],vis[i] + y);
+        vis[2*i - 1] = min(vis[2*i - 1],vis[i] + y + x);
+        vis[2*i + 1] = min(vis[2*i + 1],vis[i] + y + x);
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    
+    cout<<vis[n]<<endl;
 }

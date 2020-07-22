@@ -29,24 +29,36 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int t;
+    cin>>t;
+    while(t--){
+        string s;
+        cin>>s;
+        int a,b,c;
+        a=b=c=-1;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        int n = s.length();
+        rep(i,n,0){
+            if(a == -1)if(s[i] == '1')a = i;
+            if(b == -1)if(s[i] == '2')b = i;
+            if(c == -1)if(s[i] == '3')c = i;
+        }
+
+        if(a == -1 || b == -1 || c == -1){
+            cout<<0<<endl;
+            continue;
+        }
+
+        int ans = max({a,b,c}) - min({a,b,c}) + 1;
+
+        rep(i,n,0){
+            if(s[i] == '1')a = i;
+            if(s[i] == '2')b = i;
+            if(s[i] == '3')c = i;
+
+            ans = min(ans,max({a,b,c}) - min({a,b,c}) + 1);
+        }
+
+        cout<<ans<<endl;
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

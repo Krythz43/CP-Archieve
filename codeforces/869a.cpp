@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,24 +30,20 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int n;
+    cin>>n;
+    vinput(x,n);
+    vlli X = x;
+    vinput(y,n);
+    rep(i,n,0)x.pb(y[i]);
+    SO(x);
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    lli count = 0;
+
+    rep(i,n+1,1)rep(j,n+1,1){
+        count += binary_search(all(x),(X[i-1]^y[j-1]));
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    if(count&1)cout<<"Koyomi"<<endl;
+    else cout<<"Karen"<<endl;
 }

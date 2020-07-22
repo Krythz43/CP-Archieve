@@ -26,21 +26,22 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+
+void solve(int n,int mul){
+    if(n == 1)cout<<mul;
+    else if(n == 2)cout<<mul<<" "<<2*mul;
+    else if(n == 3)cout<<mul<<" "<<mul<<" "<<3*mul;
+    else{
+        rep(i,(n+1)/2,0)cout<<mul<<" ";
+        solve(n/2,2*mul);
+    }
+}
+
 int main()
 {
     fastio;
     int n;
     cin>>n;
-
-    vi fact;
-    for(int i = 1;i <= sqrt(n); i++){
-        if(n%i == 0){
-            fact.pb(i);
-            if(i != n/i)fact.pb(n/i);
-        }
-    }
-
-    SO(fact);
-    rep(i,n - fact.size(),0)cout<<1<<" ";
-    printarray(fact,fact.size())
+    solve(n,1);
+    nl;
 }

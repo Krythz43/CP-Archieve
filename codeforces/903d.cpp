@@ -2,7 +2,7 @@
 using namespace std;
 
 #define fastio ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL)
-#define lli long long int
+#define lli long double
 #define rep(i,n,z) for(int i=z;i<n;i++)
 #define rrep(i,z) for(int i=z;i>=0;i--)
 #define nl cout<<endl
@@ -28,25 +28,36 @@ using namespace std;
 
 int main()
 {
-    fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+   fastio;
+   int t;
+   t = 1;
+   while(t--){
+       int n;
+       cin>>n;
+       vinput(a,n);
+       map<lli,lli> l,r;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
-    }
+       rep(i,n,0)r[a[i]]++;
+       lli ans = 0;
+       lli x,y;
+       rep(i,n,0){
+           x = i;
+           y = n - i;
+           // Number of right
+           y -= r[a[i]];
+           y -= r[a[i] + 1];
+           y -= r[a[i] - 1];
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+           // Number on left
+           x -= l[a[i]];
+           x -= l[a[i] + 1];
+           x -= l[a[i] - 1];
+
+           r[a[i]]--;
+           l[a[i]]++;
+           ans+= a[i]*(x - y);
+       }
+
+       cout<<fixed<<setprecision(0)<<ans<<endl;
+   }
 }

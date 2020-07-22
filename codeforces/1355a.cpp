@@ -24,29 +24,37 @@ using namespace std;
 #define all(x) (x).begin(),(x).end()
 #define SOP(a,comp) sort(a.begin(),a.end(),comp)
 #define inf INT_MAX
-#define endl '\n'
+// #define endl '\n'
+
+llipair num(lli x){
+    lli mn = 9, mx = 0;
+    lli y;
+    while(x){
+        y = x%10;
+        mx = max(mx,y);
+        mn = min(mn,y);
+        x /= 10;
+    }
+
+    return mp(mn,mx);
+}
 
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
-
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    int t;
+    cin>>t;
+    while(t--){
+        lli x,y;
+        lli n,k;
+        cin>>n>>k;
+        k--;
+        while(k--){
+            tie(x,y) = num(n);
+            if(x == 0)break;
+            // cout<<"br "<<x<<" "<<y<<endl;
+            n += x*y;
+        }
+        cout<<n<<endl;
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

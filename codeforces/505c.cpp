@@ -26,27 +26,41 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+int n,d;
+map<int,int> gems;
+int mx = 0;
+
+const int S = 30005;
+
+int dp[S][250*2];
+
+int solve(int idx, int len){
+    if(idx > mx)return 0;
+    int & ans = dp[idx][len-(d - 250)]; 
+
+    if(ans != -1)return ans;
+
+    ans  = 0;
+    if(len > 1)ans = solve(idx+len-1,len-1);
+    ans = max({ans,solve(idx+len,len),solve(idx+len+1,len+1)});
+    if(gems.count(idx))ans += gems[idx];
+
+    return ans;
+}
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    memset(dp,-1,sizeof dp);
 
-    lli ops = 0, temp;
+    cin>>n>>d;
+    int x;
+    
     rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        cin>>x;
+        mx = max(mx,x);
+        gems[x]++;
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    cout<<solve(d,d)<<endl;
 }

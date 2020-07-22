@@ -29,24 +29,42 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int n,q;
+    cin>>n>>q;
+    string s;
+    cin>>s;
+    int pref[26][n + 1];
+    rep(i,26,0)pref[i][0] = 0;
 
-    lli ops = 0, temp;
     rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        rep(j,26,0)pref[j][i + 1] = pref[j][i];
+        pref[s[i] - 'a'][i + 1]++;
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    int l,r,k;
+    while(q--){
+        cin>>l>>r>>k;
+        l--;
+        vi x(26,0);
+        rep(i,26,0)x[i] = pref[i][r] - pref[i][l];
+
+        if(k){
+            // cout<<"ascending"<<endl;
+            int p1 = l;
+
+            rep(i,26,0){
+                rep(j,x[i],0)s[p1++] = (char)('a' + i);
+            }
+        }
+        else{
+            // cout<<"descending"<<endl;
+            int p1 = l;
+            for(int i = 25;i >= 0; i--){
+                rep(j,x[i],0)s[p1++] = (char)('a' + i);
+            }
+        }
+        cout<<s<<endl;
+    }
+
+    cout<<s<<endl;
 }

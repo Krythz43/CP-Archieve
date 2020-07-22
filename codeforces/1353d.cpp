@@ -24,29 +24,37 @@ using namespace std;
 #define all(x) (x).begin(),(x).end()
 #define SOP(a,comp) sort(a.begin(),a.end(),comp)
 #define inf INT_MAX
-#define endl '\n'
+// #define endl '\n'
 
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int t;
+    cin>>t;
+    while(t--){
+        pq <ipair> P;
+        int n;
+        cin>>n;
+        vi ans(n,0);
+        P.push(mp(n,n));
+        int l,r,mid;
+        int id = 1;
+        while(!P.empty()){
+            auto X = P.top();
+            P.pop();
+            tie(r,l) = X;
+            l = n - l;
+            r += l-1;
+            mid = (l + r)/2;
+            ans[mid] = id;
+            id++;
+            // cout<<l<<" "<<r<<" "<<mid<<endl;
+            if(l == r)continue;
+            // if(r < 0)break;
+            if(r != mid)P.push(mp(r-mid,n - (mid + 1)));
+            if(l != mid)P.push(mp(mid-l,n - l));
+        }
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        printarray(ans,n)
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

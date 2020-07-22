@@ -26,27 +26,21 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+int n,a,b,c;
+lli dp [8010];
+
+lli solve(int idx){
+    lli & ans = dp[idx];
+    if(ans != -1)return ans;
+    if(idx > n)return ans = -inf/2;
+    if(idx == n)return ans = 0;
+
+    return ans = 1 + max({solve(idx + a),solve(idx + b),solve(idx + c)});
+}
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
-
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
-    }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    memset(dp,-1,sizeof dp);
+    cin>>n>>a>>b>>c;
+    cout<<solve(0)<<endl;
 }

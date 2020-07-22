@@ -26,27 +26,38 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+const lli S = 2e6 + 5;
+const lli mod = 1e9 + 7;
+
+vlli ans(S,0);
+vector<llipair> st(S);
+
+void precal(){
+    st[1].ff = 0;
+    st[1].ss = 1;
+
+    st[2].ff = 1;
+    st[2].ss = 1;
+    // ff is one child
+    // ss is zero child
+
+    rep(i,S,3){
+        st[i].ff = (st[i - 1].ss);
+        st[i].ss = (st[i - 1].ss + 2*st[i -1].ff)%mod;
+        ans[i] = (ans[i - 3] + st[i - 1].ff)%mod;
+    }
+}
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int t;
+    cin>>t;
+    precal();
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    // rep(i,10,0)cout<<st[i].ff<<" "<<st[i].ss<<endl;
+    while(t--){
+        int n;
+        cin>>n;
+        cout<<ans[n]*4%mod<<endl;
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

@@ -29,24 +29,43 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int n,k;
+    cin>>n;
+    string s;
+    string t;
+    cin>>s>>t;
+    int c1,c2;
+    c1 = c2 = 0;
 
-    lli ops = 0, temp;
     rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        if(s[i] == '1')c1++;
+        if(s[i] == '0')c2++;
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    rep(i,n,0){
+        if(t[i] == '1')c1--;
+        if(t[i] == '0')c2--;
+    }
+
+    if(c1 !=0 || c2 != 0){
+        cout<<-1<<endl;
+        return 0;
+    }
+
+    vi mis;
+    rep(i,n,0)if(s[i] != t[i])mis.pb(s[i] - '0');
+
+    lli ans = 0;
+
+    rep(i,mis.size(),1)if(mis[i]  == mis[i - 1])ans++;
+    if(mis.size() > 1){
+        if(mis.back() == mis[0])ans++;
+    }
+
+    if(mis.empty()){
+        cout<<0<<endl;
+        return 0;
+    }
+
+    cout<<min(n/2,(ans + 1)/2 + 1)<<endl;
 }

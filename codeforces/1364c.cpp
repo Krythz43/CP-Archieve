@@ -29,24 +29,45 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
+    int n;
+    cin>>n;
     vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
-
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    int f = 1;
+    rep(i,n,0)if(a[i] > i + 1){
+        f = 0;
+        break;
+    }
+    else if(i){
+        if(a[i] < a[i - 1]){
+            f = 0;
+            break;
+        }
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    if(a[0] > 1)f = 0;
+
+    if(!f)return cout<<-1<<endl,0;
+
+    map<int,int> used;
+    vi ans(n,-1);
+
+    if(a[0] == 1){
+        used[0]++;
+        ans[0] = 0;
+    }
+
+    int lf = 0;
+
+    rep(i,n,1)if(a[i] != a[i - 1])ans[i] = a[i - 1],used[a[i - 1]]++;
+    used[a[n - 1]]++;
+
+    rep(i,n,0){
+        if(ans[i] != -1)continue;
+
+        while(used.count(lf))lf++;
+        used[lf]++;
+        ans[i] = lf;
+    }
+
+    printarray(ans,n)
 }

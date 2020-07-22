@@ -25,28 +25,50 @@ using namespace std;
 #define SOP(a,comp) sort(a.begin(),a.end(),comp)
 #define inf INT_MAX
 #define endl '\n'
+int n,m;
+vlli a,b;
+
+bool F(lli x){
+    a = b;
+    int p1 = n - 1;
+    lli t,r;
+    rep(i,m,0){
+        t = x;
+        int f = 1;
+        while(t >= 0){
+            while(p1 >= 0 and a[p1] == 0)p1--;
+
+            if(f){
+                t -= (p1 + 1);
+                f = 0;
+            }
+
+            if(p1 < 0 || t <= 0)break;
+
+            r = min(a[p1],t);
+            t -= r;
+            a[p1] -= r;
+        }
+    }
+    while(p1 >= 0 and a[p1] == 0)p1--;
+
+    return p1 < 0;
+}
 
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
-
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    cin>>n>>m;
+    b.resize(n);
+    ainput(b,n);
+    lli hi = inf*1LL*(1e5 + 5),lo = 0;
+    lli mid;
+    while(hi - lo > 1){
+        mid = (hi + lo)/2;
+        if(F(mid))hi = mid;
+        else lo = mid;
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    if(F(lo))cout<<lo<<endl;
+    else cout<<hi<<endl;
 }

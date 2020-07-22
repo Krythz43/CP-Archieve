@@ -21,32 +21,59 @@ using namespace std;
 #define vinput(a,n) vlli a(n);rep(i,n,0)cin>>a[i]
 #define ainput(a,n) rep(i,n,0)cin>>a[i]
 #define SO(a) sort(a.begin(),a.end())
-#define all(x) (x).begin(),(x).end()
+// #define LP{0OP0-        `q135687j  0.kl7-+*]igdtu70*854q    l(x) (x).begin(),(x).end()
 #define SOP(a,comp) sort(a.begin(),a.end(),comp)
 #define inf INT_MAX
 #define endl '\n'
 
+const int S = 1e3 + 5;
+int f = 0;
+
+lli dp[S][S][2];
+int n,m;
+vlli a;
+
+void solve(int idx,int sum, int inc){
+    lli & ans = dp[idx][sum][inc];
+
+    if(ans != -1 || f || idx >= n)return;
+    ans = 0;
+    if(inc)if((sum + a[idx])%m == 0){
+        f = 1;
+        return;
+    }
+
+    if(inc){sum += a[idx];
+    sum %= m;}
+
+    solve(idx + 1,sum,0);
+    solve(idx + 1,sum,1);
+}
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    cin>>n>>m;
+    memset(dp,-1,sizeof dp);
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    a.resize(n);
+    ainput(a,n);
+    if(n > m || a[0]%m == 0){
+        cout<<"YES"<<endl;
+        return 0;
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    rep(i,n,0){
+        a[i] %= m;
+        if(a[i] == 0){
+            f = 1;
+            break;
+        }
+        if(f)break;
+        solve(i+1,a[i],0);
+        solve(i+1,a[i],1);
+    }
+
+    if(f)
+    cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }

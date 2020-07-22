@@ -26,27 +26,38 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
-int main()
-{
-    fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+int n;
+vlli a;
+lli dp[505][505];
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+lli solve(lli l,lli r){
+    lli & ans = dp[l][r];
+    if(ans != -1)return ans;
+    if(l > r)return 0;
+    if(l == r)return 1;
+
+    ans = 1 + solve(l + 1, r);
+    int f = 1;
+
+    if(a[l] == a[l+1])ans = min(ans,1+ solve(l+2,r));
+    else f = 0;
+    
+    for(int i = l + 2;i <= r; i++){
+        if(a[i]  != a[i - 1])f = 0;
+        if(a[i] == a[l])ans = min(ans, solve(l + 1, i - 1) + solve(i + 1, r));
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    if(f)ans = 1;
+
+    // if(ans == 0)cout<<l<<" "<<r<<endl;
+    return ans;
+}
+
+int main(){
+    fastio;
+    cin>>n;
+    a.resize(n);
+    ainput(a,n);
+    memset(dp,-1,sizeof dp);
+    cout<<solve(0,n - 1)<<endl;
 }

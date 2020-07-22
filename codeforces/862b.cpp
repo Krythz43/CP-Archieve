@@ -26,27 +26,33 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+const int S = 1e5 + 5;
+lli n;
+vi adj[S];
+lli a=0,b=0;
+
+void dfs(int v,int p,int c){
+    if(c == 0)a++;
+    else b++;
+
+    for(auto x: adj[v]){
+        if(x == p)continue;
+        dfs(x,v,c^1);
+    }
+}
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
-
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    cin>>n;
+    int x,y;
+    rep(i,n-1,0){
+        cin>>x>>y;
+        adj[x].pb(y);
+        adj[y].pb(x);
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    dfs(1,1,0);
+
+    cout<<a*b + 1 - n<<endl;
 }

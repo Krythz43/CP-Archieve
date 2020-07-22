@@ -26,27 +26,33 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+static const int MAXN = 1e5;
+
+static int n, q;
+static long long s[MAXN];
+static long long t[MAXN];
+
 int main()
 {
-    fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    cin>>n;
+    rep(i,n,0)cin>>s[i];
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    std::sort(s, s + n);
+    for (int i = 0; i < n - 1; ++i) s[i] = s[i + 1] - s[i];
+    std::sort(s, s + n - 1);
+    for (int i = n - 1; i >= 1; --i) s[i] = s[i - 1];
+    s[0] = 0;
+    for (int i = 1; i < n; ++i)
+        t[i] = t[i - 1] + (s[i] - s[i - 1]) * (n + 1 - i);
+
+    scanf("%d", &q);
+    for (int i = 0; i < q; ++i) {
+        long long l, r;
+        scanf("%lld%lld", &l, &r);
+        l = r - l + 1;
+        int p = std::lower_bound(s, s + n, l) - &s[0] - 1;
+        printf("%lld%c", t[p] + (l - s[p]) * (n - p), i == q - 1 ? '\n' : ' ');
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    return 0;
 }

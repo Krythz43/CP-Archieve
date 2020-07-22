@@ -9,7 +9,7 @@ using namespace std;
 #define vi vector<int>
 #define vlli vector<long long int>
 #define umap unordered_map
-#define pb push_back
+#define pb emplace_back
 #define mp make_pair
 #define ss second
 #define ff first
@@ -26,27 +26,60 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+const int S = 2e5 + 5;
+
+int n,m;
+
+
+vi parent(S,0),height(S);
+
+void make(int x){
+    parent[x] = x;
+    height[x] = 0;
+}
+
+int find(int x){
+    if(x == parent[x])return x;
+    return parent[x] = find(parent[x]);
+}
+
+void Union(int a,int b){
+    a = find(a);
+    b = find(b);
+    if(a != b){
+        if(height[a] < height[b])swap(a,b);
+        parent[b] = a;
+        if(height[a] == height[b])height[a]++;
+    }
+}
+
+vi adj[S],tempadj[S],vis(S,0);
+
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int t;
+    cin>>t;
+    while(t--){
+        cin>>n>>m;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        rep(i,n + 1,1){
+            vis[i] = parent[i] = 0;
+            make(i);
+            adj[i].clear();
+            tempadj[i].clear();
+        }
+
+        int w,x,y;
+        vector <ipair> edge;
+        rep(i,m,0){
+            cin>>w>>x>>y;
+            Union(x,y);
+            if(w)adj[x].pb(y);
+            else{
+                edge.pb(x,y); 
+            }
+        }
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
 }

@@ -26,27 +26,55 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+const lli mod = 998244353;
+const int S = 5e5+5;
+ 
+lli fact[S];
+lli inv[S];
+
+lli multi(lli x,lli n){
+    if(n == 0)return 1;
+    if(n==1)return x%mod;
+    lli ans = multi((x*x)%mod,n/2);
+    if(n%2)ans=(ans*x)%mod;
+    return ans;
+}
+
+void precal()
+{
+  lli i;
+  fact[0] = 1;
+  inv[0] = multi(fact[0],mod-2);
+  for(i=1;i<S;i++)
+  {
+    fact[i] = (i*fact[i-1])%mod;
+    inv[i] = multi(fact[i],mod-2);
+  }
+}
+
+lli ncr(lli x,lli y)
+{
+  if(x<y || x<0 || y<0)
+    return 0;
+  lli temp = fact[x];
+  temp = (temp*inv[y])%mod;
+  temp = (temp*inv[x-y])%mod;
+  return temp;
+}
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int n,k;
+    cin>>n>>k;
+    precal();
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    lli ans = 0;
+
+    rep(i,n + 1,1){
+        if(n/i - 1 < k -1)break;
+        ans = (ans + ncr(n/i - 1,k - 1))%mod;
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    cout<<ans<<endl;
 }

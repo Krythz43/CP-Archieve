@@ -26,27 +26,29 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+// const lli mod = 998244353;
+const lli mod = 1e9 + 7;
+
+lli multi(lli x,lli n){
+    if(n == 0)return 1;
+    if(n==1)return x%mod;
+    lli ans = multi((x*x)%mod,n/2)%mod;
+    if(n%2)ans=(ans*x)%mod;
+    return ans;
+}
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    lli n,m,k;
+    cin>>n>>m>>k;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    if((n+m)%2 == 1 && k == -1){
+        cout<<0<<endl;
+        return 0;
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    n--;
+    m--;
+    lli x = (n%(mod - 1))*(m%(mod - 1))%(mod - 1);
+    cout<<multi(2,x)%mod<<endl;
 }

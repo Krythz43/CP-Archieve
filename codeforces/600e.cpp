@@ -26,27 +26,63 @@ using namespace std;
 #define inf INT_MAX
 #define endl '\n'
 
+const int S = 1e5 + 5;
+int n;
+int id[S];
+map<int,int> M[S];
+lli cnt[S];
+lli mx[S];
+lli ans[S];
+lli col[S];
+
+vi adj[S];
+
+void merge(int a,int b){
+    if(M[id[a]].size() < M[id[b]].size())swap(id[a],id[b]);
+
+    int idx = id[a];
+
+    for(auto x: M[id[b]]){
+        M[idx][x.ff] += x.ss;
+        if(M[idx][x.ff] > mx[idx]){
+            mx[idx] = M[idx][x.ff];
+            cnt[idx] = 0;
+        }
+
+        if(M[idx][x.ff] == mx[idx])cnt[idx] += x.ff;
+    }
+}
+void dfs(int idx,int p){
+
+    for(auto to: adj[idx]){
+        if(to == p)continue;
+        dfs(to,idx);
+        merge(idx,to);
+    }
+
+    ans[idx] = cnt[id[idx]];
+}
+
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
-
-    lli ops = 0, temp;
+    cin>>n;
     rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        cin >> col[i];
+        M[i][col[i]]++;
+        id[i] = i;
+        mx[i] = 1;
+        cnt[i] = col[i];
     }
+    int x,y;
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    rep(i,n-1,0){
+        cin>>x>>y;
+        x--,y--;
+        adj[x].pb(y),adj[y].pb(x);
+    }
+    dfs(0,-1);
+
+    rep(i,n,0)cout<<ans[i]<<" ";
+    nl;
 }

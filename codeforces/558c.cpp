@@ -24,29 +24,47 @@ using namespace std;
 #define all(x) (x).begin(),(x).end()
 #define SOP(a,comp) sort(a.begin(),a.end(),comp)
 #define inf INT_MAX
-#define endl '\n'
+// #define endl '\n'
 
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
+    int n;
+    cin>>n;
     vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    int mx = *max_element(all(a));
 
-    lli ops = 0, temp;
+    vlli ans(2*mx + 5);
+    vlli occ(2*mx + 5);
+    vlli vis(2*mx + 5, - 1);
+
+    queue <ipair> Q;
+
+    int idx,wei;
+
     rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+        Q = queue<ipair>();
+        Q.push(mp(a[i],0));
+
+        while(!Q.empty()){
+            auto X = Q.front();
+            Q.pop();
+            tie(idx,wei) = X;
+            if(vis[idx] == i)continue;
+
+            // cout<<i<<" "<<idx<<endl;
+            vis[idx] = i;
+            occ[idx]++;
+            ans[idx] += wei;
+            if(2*idx <= mx && vis[2*idx] != i)Q.push(mp(2*idx,wei + 1));
+            if(vis[idx/2] != i)Q.push(mp(idx/2,wei + 1));
+        }   
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    lli res = inf;
+    rep(i,ans.size(),0){
+        if(occ[i] == n)res = min(res,ans[i]);
+    }
+
+    cout<<res<<endl;
 }

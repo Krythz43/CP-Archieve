@@ -29,24 +29,28 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
+    int n;
+    cin>>n;
     vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
-
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    int f = 1;
+    vlli ans;
+    ans.pb(a[0]);
+    rep(i,n,1){
+        ans.pb(a[i]);
+        ans.pb(a[i]);
+        ans.pb(a[0]);
     }
 
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    rep(i,ans.size(),1){
+        if(!binary_search(all(a),__gcd(ans[i],ans[i - 1]))){
+            f = 0;
+            break;
+        }
+    }
+
+    if(!f)cout<<-1<<endl;
+    else{
+        cout<<ans.size()<<endl;
+        printarray(ans,ans.size())
+    }
 }

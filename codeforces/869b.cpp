@@ -3,7 +3,7 @@ using namespace std;
 
 #define fastio ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL)
 #define lli long long int
-#define rep(i,n,z) for(int i=z;i<n;i++)
+#define rep(i,n,z) for(lli i=z;i<n;i++)
 #define rrep(i,z) for(int i=z;i>=0;i--)
 #define nl cout<<endl
 #define vi vector<int>
@@ -29,24 +29,23 @@ using namespace std;
 int main()
 {
     fastio;
-    lli  n,k,m;
-    cin>>n>>k>>m;
-    vinput(a,n);
-    SO(a);
-    long double ans = 0;
-    lli sum = 0;
-    rep(i,n,0)sum += a[i];
+    lli a,b;
+    cin>>a>>b;
 
-    lli ops = 0, temp;
-    rep(i,n,0){
-        temp = (n - i)*k;
-        temp = min(temp,m - ops);
-        if(temp < 0)continue;
-        // cout<<temp<<" "<<sum<<" "<<n - i<<endl;
-        ans = max(ans,(temp + sum)/((n - i)*(long double)1.0));
-        sum -= a[i];
-        ops++;
+    swap(a,b);
+
+    lli A = a-b;
+    if(A == 0){
+        cout<<1<<endl;
     }
-
-    cout<<std::fixed<<std::setprecision(20)<<ans<<endl;
+    else if(A >= 5){
+        cout<<0<<endl;
+    }
+    else{
+        vlli x;
+        rep(i,a + 1,b + 1)x.pb(i%10);
+        lli ans= 1;
+        for(auto y: x)ans*=y;
+        cout<<ans%10<<endl;
+    }
 }
